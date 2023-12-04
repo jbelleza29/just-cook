@@ -1,6 +1,13 @@
+.App {
+  font-family: 'Lato', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .Hero {
   width: 100vw;
   display: flex;
+  max-height: 60vh;
+  object-fit: cover;
 
   &--img {
     width: 100%;
@@ -13,9 +20,10 @@
     justify-content: center;
     gap: 24px;
     background-color: #403635;
-    padding: 12px;
+    padding: 16px;
     color: white;
     font-size: 14px;
+    text-transform: uppercase;
   }
 }
 
@@ -81,8 +89,9 @@
 
   .Footer {
     background-color: #403635;
-    padding: 12px;
+    padding: 16px;
     color: white;
     font-size: 14px;
+    font-weight: 500;
   }
 }
