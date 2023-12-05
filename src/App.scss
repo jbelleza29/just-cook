@@ -7,10 +7,10 @@
   width: 100vw;
   display: flex;
   max-height: 60vh;
-  object-fit: cover;
 
   &--img {
     width: 100%;
+    object-fit: cover;
   }
 }
 
@@ -21,9 +21,18 @@
     gap: 24px;
     background-color: #403635;
     padding: 16px;
-    color: white;
-    font-size: 14px;
     text-transform: uppercase;
+
+    a {
+      color: white;
+      font-size: 14px;
+      border: none;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
@@ -74,6 +83,7 @@
     }
 
     button {
+      font-family: inherit;
       align-self: flex-end;
       margin-top: auto;
       color: #ffcb00;
@@ -84,6 +94,11 @@
       border-radius: 8px;
       border: none;
       cursor: pointer;
+      transition: transform 100ms ease-out;
+
+      &:hover {
+        transform: translateY(-4px)
+      }
     }
   }
 

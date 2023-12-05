@@ -53,7 +53,9 @@ function App() {
           <nav>
             <ul className="Nav--ul">
               {navHeaders.map((navHeader) => (
-                <li key={navHeader.name}>{navHeader.name}</li>
+                <li key={navHeader.name}>
+                  <a href="#">{navHeader.name}</a>
+                </li>
               ))}
             </ul>
           </nav>
