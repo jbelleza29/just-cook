@@ -8,31 +8,13 @@
   display: flex;
   max-height: 60vh;
 
+  @media screen and (max-width: 800px) {
+    max-height: 100vh;
+  }
+
   &--img {
     width: 100%;
     object-fit: cover;
-  }
-}
-
-.Nav {
-  &--ul {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    background-color: #403635;
-    padding: 16px;
-    text-transform: uppercase;
-
-    a {
-      color: white;
-      font-size: 14px;
-      border: none;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 }
 
@@ -44,17 +26,23 @@
 }
 
 .Recipes {
-  :nth-child(even).RecipeCard {
-    flex-direction: row-reverse;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-width: 801px) {
+    display: block;
+    :nth-child(even).RecipeCard {
+      flex-direction: row-reverse;
 
-    .RecipeCard__description {
-      align-items: flex-end;
-      button {
-        align-self: flex-start;
+      .RecipeCard__description {
+        align-items: flex-end;
+        button {
+          align-self: flex-start;
+        }
       }
     }
-
   }
+
 }
 
 .RecipeModal {

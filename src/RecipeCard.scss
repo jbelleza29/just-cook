@@ -3,11 +3,21 @@
   gap: 24px;
   margin-bottom: 36px;
   font-family: inherit;
+  flex-direction: row;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 
   img {
     width: 370px;
     height: auto;
     object-fit: cover;
+    
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      max-width: 370px;
+    }
   }
 
   &__description {
@@ -38,6 +48,12 @@
       border: none;
       cursor: pointer;
       transition: transform 100ms ease-out;
+
+      @media screen and (max-width: 800px) {
+        margin-top: 24px;
+        align-self: flex-start;
+        font-size: 12px;
+      }
 
       &:hover {
         transform: translateY(-4px)

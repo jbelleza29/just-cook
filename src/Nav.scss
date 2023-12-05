@@ -1,0 +1,75 @@
+.Nav {
+  &__desktop {
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+    ul {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      background-color: #403635;
+      padding: 16px;
+      text-transform: uppercase;
+
+      a {
+        color: white;
+        font-size: 14px;
+        border: none;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &__mobile {
+    @media screen and (max-width: 800px) {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    display: none;
+    background-color: #403635;
+    padding: 8px;
+    position: relative;
+
+    ul {
+      position: absolute;
+      background-color: inherit;
+      top: 54px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border: 1px solid rgb(240, 240, 240);
+      box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+      align-items: center;
+
+
+      a {
+        color: white;
+        font-size: 14px;
+        border: none;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    button {
+      border: none;
+      background: transparent;
+      font-size: 30px;
+      color: white;
+      float: right;
+      cursor: pointer;
+    }
+  }
+}

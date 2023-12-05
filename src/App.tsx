@@ -3,8 +3,10 @@ import './App.scss';
 import { useEffect, useState } from 'react';
 import Modal from './Modal';
 import RecipeCard from './RecipeCard';
+import Nav from './Nav';
 
 import heroBanner from './assets/hero-banner-desktop.jpeg';
+import heroBannerMobile from './assets/hero-banner-mobile.jpeg';
 
 type Recipe = {
   uuid: string;
@@ -41,25 +43,6 @@ type Special = {
   code?: string;
   text: string;
 };
-
-const navHeaders = [
-  {
-    name: 'Home',
-    url: '/',
-  },
-  {
-    name: 'Recipes',
-    url: '/recipes',
-  },
-  {
-    name: 'About',
-    url: '/about',
-  },
-  {
-    name: 'Contact us',
-    url: '/contact-us',
-  },
-];
 
 function App() {
   const defaultSelectedRecipe = {} as Recipe;
@@ -116,22 +99,17 @@ function App() {
   return (
     <div className="App">
       <header>
-        {/* hero banner */}
         <div className="Hero">
-          <img className="Hero--img" src={heroBanner} alt="just cook banner" />
+          <img
+            className="Hero--img"
+            srcSet={`${heroBannerMobile} 1125w, ${heroBanner} 1366w`}
+            sizes="(max-width: 800px) 480px,
+         1200px"
+            src={heroBanner}
+            alt="just cook banner"
+          />
         </div>
-        {/* nav */}
-        <div className="Nav">
-          <nav>
-            <ul className="Nav--ul">
-              {navHeaders.map((navHeader) => (
-                <li key={navHeader.name}>
-                  <a href="#">{navHeader.name}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+        <Nav />
       </header>
       {/* content */}
       <main>
