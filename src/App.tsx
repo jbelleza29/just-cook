@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
 import './App.scss';
+
+import { useEffect, useState } from 'react';
+import Modal from './Modal';
+
 import heroBanner from './assets/hero-banner-desktop.jpeg';
 
 const navHeaders = [
@@ -24,6 +27,7 @@ const navHeaders = [
 function App() {
   const [foodRecipes, setFoodRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const getRecipes = async () => {
     setIsLoading(true);
     try {
@@ -74,7 +78,9 @@ function App() {
                   <div className="RecipeCard__description">
                     <h3>{food.title}</h3>
                     <p>{food.description}</p>
-                    <button>View recipe</button>
+                    <button onClick={() => setIsModalOpen(true)}>
+                      View recipe
+                    </button>
                   </div>
                 </div>
               ))}
@@ -88,6 +94,12 @@ function App() {
           <p>Just Cook | The Best Recipe &copy; and &#169; 2012 - 2022</p>
         </div>
       </footer>
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <h2>Modal here</h2>
+          <p>This is modal</p>
+        </Modal>
+      )}
     </div>
   );
 }
