@@ -8,6 +8,9 @@ import Nav from './Nav';
 import heroBanner from './assets/hero-banner-desktop.jpeg';
 import heroBannerMobile from './assets/hero-banner-mobile.jpeg';
 
+import test1 from './assets/img/brussel_chips.jpg';
+import test2 from './assets/img/queso_brat_scramble.jpg';
+
 type Recipe = {
   uuid: string;
   title: string;
@@ -100,14 +103,11 @@ function App() {
     <div className="App">
       <header>
         <div className="Hero">
-          <img
-            className="Hero--img"
-            srcSet={`${heroBannerMobile} 1125w, ${heroBanner} 1366w`}
-            sizes="(max-width: 800px) 480px,
-         1200px"
-            src={heroBanner}
-            alt="just cook banner"
-          />
+          <picture>
+            <source media="(max-width: 800px)" srcSet={heroBannerMobile} />
+            <source media="(min-width: 801px)" srcSet={heroBanner} />
+            <img src={heroBannerMobile} width={800} alt="just cook banner" />
+          </picture>
         </div>
         <Nav />
       </header>
