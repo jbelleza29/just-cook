@@ -2,8 +2,45 @@ import './App.scss';
 
 import { useEffect, useState } from 'react';
 import Modal from './Modal';
+import RecipeCard from './RecipeCard';
 
 import heroBanner from './assets/hero-banner-desktop.jpeg';
+
+type Recipe = {
+  uuid: string;
+  title: string;
+  description: string;
+  images: {
+    full: string;
+    medium: string;
+    small: string;
+  };
+  servings: number;
+  prepTime: number;
+  cookTime: number;
+  postDate: string;
+  editDate: string;
+  ingredients: {
+    uuid: string;
+    amount: number;
+    measurement: string;
+    name: string;
+  }[];
+  directions: {
+    instructions: string;
+    optional: boolean;
+  }[];
+};
+
+type Special = {
+  uuid: string;
+  ingredientId: string;
+  type: 'event' | 'local' | 'promocode' | 'sale';
+  title: string;
+  geo?: string;
+  code?: string;
+  text: string;
+};
 
 const navHeaders = [
   {
@@ -25,11 +62,15 @@ const navHeaders = [
 ];
 
 function App() {
-  const [foodRecipes, setFoodRecipes] = useState([]);
-  const [specials, setSpecials] = useState([]);
+  const defaultSelectedRecipe = {} as Recipe;
+  const [foodRecipes, setFoodRecipes] = useState<Recipe[]>([]);
+  const [specials, setSpecials] = useState<Special[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRecipe, setSelectedRecipe] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe>(
+    defaultSelectedRecipe
+  );
+
   const getRecipes = async () => {
     setIsLoading(true);
     try {
@@ -49,15 +90,20 @@ function App() {
       const data = await fetch('http://localhost:3001/specials');
       const specials = await data.json();
       setSpecials(specials);
-      console.log(specials);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const onClickViewRecipe = (event, foodId) => {
+  const onClickViewRecipe = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    foodId: string | undefined
+  ) => {
     console.log(event.target, foodId);
-    const currentRecipe = foodRecipes.find((recipe) => recipe.uuid === foodId);
+    // @ts-expect-error recipe might be null
+    const currentRecipe: Recipe = foodRecipes.find(
+      (recipe) => recipe.uuid === foodId
+    );
     console.log(currentRecipe);
     setSelectedRecipe(currentRecipe);
     setIsModalOpen(true);
@@ -95,16 +141,15 @@ function App() {
           ) : (
             <div className="Recipes">
               {foodRecipes.map((food) => (
-                <div className="RecipeCard" key={food.uuid}>
-                  <img src={`src/assets/${food.images.medium}`} />
-                  <div className="RecipeCard__description">
-                    <h3>{food.title}</h3>
-                    <p>{food.description}</p>
-                    <button onClick={(e) => onClickViewRecipe(e, food.uuid)}>
-                      View recipe
-                    </button>
-                  </div>
-                </div>
+                <RecipeCard
+                  key={food.uuid}
+                  id={food.uuid}
+                  src={`src/assets/${food.images.medium}`}
+                  title={food.title}
+                  description={food.description}
+                  onClickView={onClickViewRecipe}
+                  withButton
+                />
               ))}
             </div>
           )}
@@ -117,38 +162,25 @@ function App() {
         </div>
       </footer>
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Modal onClose={() => setIsModalOpen(false)}>
           <div>
             <div className="RecipeModal">
-              <div className="RecipeCard">
-                <img src={`src/assets/${selectedRecipe.images.medium}`} />
-                <div className="RecipeCard__description">
-                  <h3>{selectedRecipe.title}</h3>
-                  <p>{selectedRecipe.description}</p>
-                  <div className="RecipeCard__description__prep">
-                    <span>
-                      <span>Cooking time:</span>{' '}
-                      <span>{selectedRecipe.cookTime}</span>
-                    </span>
-                    <span>
-                      <span>Prep time:</span>{' '}
-                      <span>{selectedRecipe.prepTime}</span>
-                    </span>
-                    <span>
-                      <span>Servings:</span>{' '}
-                      <span>{selectedRecipe.servings}</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <RecipeCard
+                src={`src/assets/${selectedRecipe.images.medium}`}
+                title={selectedRecipe.title}
+                description={selectedRecipe.description}
+                cookTime={selectedRecipe.cookTime}
+                prepTime={selectedRecipe.prepTime}
+                servings={selectedRecipe.servings}
+              />
               <div className="RecipeModal__instructions">
                 <div>
                   <h4>Ingredients</h4>
                   <ul className="RecipeModal__instructions__list">
                     {selectedRecipe.ingredients.map((ingredient) => {
-                      const specialRecipe = specials.find(
+                      const specialRecipe: Special = specials.find(
                         (special) => special.ingredientId == ingredient.uuid
-                      );
+                      )!;
                       console.log(specialRecipe);
                       return (
                         <li key={ingredient.uuid}>

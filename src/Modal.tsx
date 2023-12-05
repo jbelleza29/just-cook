@@ -1,11 +1,19 @@
 import './Modal.scss';
 import { createPortal } from 'react-dom';
 
-const Backdrop = ({ onClose }) => {
+type SharedProps = {
+  onClose: () => void;
+};
+
+type ModalProps = SharedProps & {
+  children: React.ReactNode;
+};
+
+const Backdrop = ({ onClose }: SharedProps) => {
   return <div className="Backdrop" onClick={onClose}></div>;
 };
 
-const Modal = ({ onClose, children }) => {
+const Modal = ({ onClose, children }: ModalProps) => {
   return (
     <>
       {createPortal(

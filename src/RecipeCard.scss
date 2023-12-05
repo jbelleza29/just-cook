@@ -1,0 +1,57 @@
+.RecipeCard {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 36px;
+  font-family: inherit;
+
+  img {
+    width: 370px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    h3 {
+      font-size: 24px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    button {
+      font-family: inherit;
+      align-self: flex-end;
+      margin-top: auto;
+      color: #ffcb00;
+      font-size: 16px;
+      font-weight: 400;
+      background-color: #403635;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 100ms ease-out;
+
+      &:hover {
+        transform: translateY(-4px)
+      }
+    }
+
+    &__prep {
+      margin-top: auto;
+      display: flex;
+      gap: 3em;
+
+      span :nth-child(1) {
+        font-weight: 700;
+      }
+    }
+  }
+}
