@@ -8,9 +8,6 @@ import Nav from './Nav';
 import heroBanner from './assets/hero-banner-desktop.jpeg';
 import heroBannerMobile from './assets/hero-banner-mobile.jpeg';
 
-import test1 from './assets/img/brussel_chips.jpg';
-import test2 from './assets/img/queso_brat_scramble.jpg';
-
 type Recipe = {
   uuid: string;
   title: string;
