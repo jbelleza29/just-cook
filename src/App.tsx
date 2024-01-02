@@ -82,12 +82,10 @@ function App() {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     foodId: string | undefined
   ) => {
-    console.log(event.target, foodId);
     // @ts-expect-error recipe might be null
     const currentRecipe: Recipe = foodRecipes.find(
       (recipe) => recipe.uuid === foodId
     );
-    console.log(currentRecipe);
     setSelectedRecipe(currentRecipe);
     setIsModalOpen(true);
   };
@@ -156,7 +154,6 @@ function App() {
                       const specialRecipe: Special = specials.find(
                         (special) => special.ingredientId == ingredient.uuid
                       )!;
-                      console.log(specialRecipe);
                       return (
                         <li key={ingredient.uuid}>
                           <span>{ingredient.name}</span>
